@@ -1,0 +1,14 @@
+.movies {
+  display: flex;
+  //align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  overflow: hidden;
+
+  img {
+    margin: 5px;
+    width: 200px;
+    height: 296px;
+  }
+}

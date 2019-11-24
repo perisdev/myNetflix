@@ -1,0 +1,74 @@
+@import "../../../variables.scss";
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 150px;
+  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 33%, rgba(0, 0, 5, 0.6) 66%, transparent);
+
+  // border: 1px solid white;
+
+  .logo {
+    margin-left: 50px;
+    height: 82px;
+  }
+
+  .bt-wrap {
+    display: flex;
+    align-items: flex-start;
+    margin-right: 50px;
+    height: 82px;
+
+    .bt,
+    .bt-movie {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+
+      background: $netflix-color;
+      border-radius: 3px;
+      width: 132px;
+      height: 35px;
+
+      text-decoration: none;
+      color: $bt-font-color;
+      font-family: $main-fonts;
+      cursor: pointer;
+    }
+
+    .bt-movie {
+      width: 90px;
+    }
+
+    .active-link {
+      color: $netflix-color;
+      background-color: $bt-font-color;
+    }
+
+    .search {
+      height: 35px;
+      width: 300px;
+      height: 35px;
+      margin-left: 20px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid $border-color;
+      outline: none;
+      border-radius: 5px;
+      background-color: transparent;
+      background-image: url("../../../assets/img/lens.png");
+      background-size: 35px;
+      background-repeat: no-repeat;
+      color: $border-color;
+      font-size: 1.1em;
+    }
+
+    .user {
+      margin-left: 20px;
+      height: 35px;
+    }
+  }
+}
