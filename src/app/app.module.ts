@@ -9,6 +9,7 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoginComponent } from './components/login/login.component';
     NavComponent,
     MovieListComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

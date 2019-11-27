@@ -1,5 +1,7 @@
 <nav class="nav">
-  <img src="../../../assets/img/myNetflix.png" alt="logo myNetflix" class="logo">
+  <a routerLink="" routerLinkActive="active-link">
+    <img src="../../../assets/img/myNetflix.png" alt="logo myNetflix" class="logo">
+  </a>
 
   <div class="bt-wrap">
     <a class="bt-movie" routerLink="/movies/premieres" routerLinkActive="active-link" *ngIf="userService.getUser()">

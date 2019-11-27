@@ -3,8 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
+
+  // welcome
+  { path: "", component: WelcomeComponent },
+
   // movies
   // { path: "", redirectTo: "movies/popular", pathMatch: "full" },
   { path: "movies/:listType", component: MovieListComponent },
