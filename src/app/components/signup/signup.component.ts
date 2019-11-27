@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -12,36 +13,56 @@ export class SignupComponent implements AfterViewInit {
   @ViewChild('username', { read: ElementRef, static: false })
   username;
 
-  msg: object; // res msg from endpoint
+  // msg from endpoint
+  msg: object; 
   msgClass: String = 'msgKo';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   // to set focus in username.
-  ngAfterViewInit(){
-    setTimeout(() => { 
+  ngAfterViewInit() {
+    setTimeout(() => {
       this.username.nativeElement.focus()
-     }, 0);
-  }  
+    }, 0);
+  }
 
+  // Sign up
   signUp(form) {
-    console.log(form);
 
-    if (form.status === 'VALID') {
-
+    if (form.status === 'VALID')
       this.userService.register(form.value).subscribe(
         res => {
           this.msg = res;
           this.msgClass = 'msgOk';
-          this.userService.isRegisted = true;
+          setTimeout(() => this.autoLogin(form), 1000);
         },
         err => {
           this.msg = err.error;
           this.msgClass = 'msgKo';
-        }
-      )
-    } else {
+        });
+
+    else
       this.msg = { message: '.. complement all data ..' }
-    }
+
+  }
+
+  // auto login
+  autoLogin(form) {
+  
+    this.userService.login(form.value).subscribe(
+      res => {
+        
+        let user:object = {
+          username: form.value.username,
+          email: form.value.email,
+          level: 2,
+          // token: res['token']
+        }
+
+        this.userService.setUser(user, res['token']);
+        this.router.navigate(['/movies/premieres']);
+      },
+      err => this.msg = err.error
+    );
   }
 }

@@ -2,22 +2,22 @@
   <img src="../../../assets/img/myNetflix.png" alt="logo myNetflix" class="logo">
 
   <div class="bt-wrap">
-    <a class="bt-movie" routerLink="/movies/premieres" routerLinkActive="active-link" *ngIf="userService.isRegisted">
+    <a class="bt-movie" routerLink="/movies/premieres" routerLinkActive="active-link" *ngIf="userService.getUser()">
       <span>Premieres</span>
     </a>
-    <a class="bt-movie" routerLink="/movies/popular" routerLinkActive="active-link" *ngIf="userService.isRegisted">
+    <a class="bt-movie" routerLink="/movies/popular" routerLinkActive="active-link" *ngIf="userService.getUser()">
       <span>Popular</span>
     </a>
-    <a class="bt-movie" routerLink="/movies/genre" routerLinkActive="active-link" *ngIf="userService.isRegisted">
+    <a class="bt-movie" routerLink="/movies/genre" routerLinkActive="active-link" *ngIf="userService.getUser()">
       <span>Genre</span>
     </a>
-    <a class="bt" routerLink="/signup" routerLinkActive="active-link" *ngIf="!userService.isRegisted">
+    <a class="bt" routerLink="/signup" routerLinkActive="active-link" *ngIf="!userService.getUser()">
       <span>Sign Up</span>
     </a>
-    <a class="bt" routerLink="/login" routerLinkActive="active-link" *ngIf="!userService.isRegisted">
+    <a class="bt" routerLink="/login" routerLinkActive="active-link" *ngIf="!userService.getUser()">
       <span>Log In</span>
     </a>
-    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.isRegisted">
-    <img src="../../../assets/img/user.png" alt="user icon" class="user" *ngIf="userService.isRegisted">
+    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.getUser()">
+    <img src="../../../assets/img/user.png" alt="user icon" class="user" *ngIf="userService.getUser()">
   </div>
 </nav>
