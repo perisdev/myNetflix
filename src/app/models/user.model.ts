@@ -1,5 +1,5 @@
-export interface User{
-  username:string,
+export interface User {
+  username: string,
   password: String,
   email: String,
   level: {

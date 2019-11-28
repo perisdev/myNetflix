@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class MovieService {
 
   apiUrl='http://localhost:3000/movies';
+  noGenres: Array<String> = ['popular', 'premieres', 'latest'];
 
   constructor(private httpClient:HttpClient) { }
 
@@ -15,12 +16,15 @@ export class MovieService {
 
     let tmpUrl:string;
 
-    if (listType === 'genre')
-       tmpUrl = `${this.apiUrl}/?genre=war`;
+    if (this.noGenres.includes(listType))
+      tmpUrl = `${this.apiUrl}/${listType}`;
     else
-       tmpUrl = `${this.apiUrl}/${listType}`;
+      tmpUrl = `${this.apiUrl}/?genre=${listType}`;
 
     return this.httpClient.get(tmpUrl);
   }
-  
+
+  getGenres():Observable<object> {
+    return this.httpClient.get(this.apiUrl + "/genres");
+  }
 }

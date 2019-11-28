@@ -13,11 +13,11 @@ const routes: Routes = [
   // movies
   // { path: "", redirectTo: "movies/popular", pathMatch: "full" },
   { path: "movies/:listType", component: MovieListComponent },
+  { path: "movies/title/:title", component: MovieListComponent },
 
   //user
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent }
-
 
   // {path: "", redirectTo: "discover", pathMatch:"full"},
   // {path:"discover", component:MovieListComponent},

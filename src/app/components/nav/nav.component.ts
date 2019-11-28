@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,10 +10,17 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private movieService: MovieService) { }
+
+  genres: object = {};
 
   ngOnInit() {
     this.isAlreadyLogged();
+
+    // fill genres
+    this.movieService.getGenres().subscribe(
+      res => this.genres = res
+    );
   }
 
   // user is already logged. 
@@ -35,4 +43,12 @@ export class NavComponent implements OnInit {
       );
   }
 
+  mySearch(search) {
+    if (search.key === 'Enter')
+      this.router.navigate(['/movies/title/', {
+        title: search.target.value,
+        genre: undefined
+      }]);
+    // this.router.navigate([`/movies/title/${search.target.value}`]);
+  }
 }

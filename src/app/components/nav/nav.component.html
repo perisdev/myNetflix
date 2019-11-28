@@ -1,25 +1,46 @@
 <nav class="nav">
-  <a routerLink="" routerLinkActive="active-link">
+  <a href="/">
     <img src="../../../assets/img/myNetflix.png" alt="logo myNetflix" class="logo">
   </a>
 
   <div class="bt-wrap">
+
+    <!-- movie buttons -->
     <a class="bt-movie" routerLink="/movies/premieres" routerLinkActive="active-link" *ngIf="userService.getUser()">
       <span>Premieres</span>
     </a>
     <a class="bt-movie" routerLink="/movies/popular" routerLinkActive="active-link" *ngIf="userService.getUser()">
       <span>Popular</span>
     </a>
-    <a class="bt-movie" routerLink="/movies/genre" routerLinkActive="active-link" *ngIf="userService.getUser()">
-      <span>Genre</span>
+    <a class="bt-movie" routerLink="/movies/latest" routerLinkActive="active-link" *ngIf="userService.getUser()">
+      <span>Latest</span>
     </a>
+
+    <!-- genre button -->
+    <div class="dropdown" *ngIf="userService.getUser()">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Genre
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!-- <a *ngFor="let item of genres" class="dropdown-item" [href]="item.name">{{ item.name }}</a> -->
+        <a *ngFor="let item of genres" class="dropdown-item" [routerLink]="'/movies/' + item.name "
+          routerLinkActive="active-link">{{ item.name }}</a>
+      </div>
+    </div>
+
+    <!-- login buttons -->
     <a class="bt" routerLink="/signup" routerLinkActive="active-link" *ngIf="!userService.getUser()">
       <span>Sign Up</span>
     </a>
     <a class="bt" routerLink="/login" routerLinkActive="active-link" *ngIf="!userService.getUser()">
       <span>Log In</span>
     </a>
-    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.getUser()">
+
+    <!-- search zone -->
+    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.getUser()" (keyup)="mySearch($event)">
+
+    <!-- user zone -->
     <img src="../../../assets/img/user.png" alt="user icon" class="user" *ngIf="userService.getUser()">
   </div>
 </nav>

@@ -9,8 +9,6 @@
   background: rgba(0, 0, 0, 0.6);
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 33%, rgba(0, 0, 5, 0.6) 66%, transparent);
 
-  // border: 1px solid white;
-
   .logo {
     margin-left: 50px;
     height: 82px;
@@ -69,6 +67,28 @@
     .user {
       margin-left: 20px;
       height: 35px;
+    }
+
+    // genre button
+    #dropdownMenuButton {
+      background: $netflix-color;
+      border: none;
+      border-radius: 3px;
+      width: 90px;
+      height: 35px;      
+    }
+
+    .dropdown-menu{
+      background: transparent;
+      
+      .dropdown-item {
+        background: rgba(0, 0, 0, 0.9);
+        color: $border-color;
+
+        &:hover {
+          color: $netflix-color;
+        }
+      }
     }
   }
 }
