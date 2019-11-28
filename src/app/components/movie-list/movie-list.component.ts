@@ -20,10 +20,7 @@ export class MovieListComponent implements OnInit {
   ngOnInit() {
 
     this.route.paramMap.subscribe(params => {
-
-      this.listType = params.get('listType');
-
-      this.movieService.getMovies(this.listType).subscribe(
+      this.movieService.getMovies(params).subscribe(
         res => this.movies = Object.values(res),
         err => this.movies = []
       );

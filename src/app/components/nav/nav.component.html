@@ -23,7 +23,6 @@
         Genre
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <!-- <a *ngFor="let item of genres" class="dropdown-item" [href]="item.name">{{ item.name }}</a> -->
         <a *ngFor="let item of genres" class="dropdown-item" [routerLink]="'/movies/' + item.name "
           routerLinkActive="active-link">{{ item.name }}</a>
       </div>

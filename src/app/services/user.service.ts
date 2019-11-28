@@ -22,7 +22,6 @@ export class UserService {
   };
 
   getProfile(token: string): Observable<object> {
-    console.log(token);
     return this.httpClient.get('http://localhost:3000/user/profile', {
       headers: {
         key: token

@@ -43,12 +43,11 @@ export class NavComponent implements OnInit {
       );
   }
 
+  // search by title
   mySearch(search) {
     if (search.key === 'Enter')
       this.router.navigate(['/movies/title/', {
-        title: search.target.value,
-        genre: undefined
+        title: search.target.value
       }]);
-    // this.router.navigate([`/movies/title/${search.target.value}`]);
   }
 }
