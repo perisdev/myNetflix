@@ -1,14 +1,17 @@
-.movies {
+.wrap {
   display: flex;
-  //align-items: center;
-  justify-content: center;
-
-  width: 100vw;
+  width: 99vw;
   overflow: hidden;
 
-  img {
-    margin: 5px;
-    width: 200px;
-    height: 296px;
+  .movies {
+    display: flex;
+    justify-content: flex-start;
+    width: auto;
+
+    img {
+      margin: 5px;
+      width: 200px;
+      height: 296px;
+    }
   }
 }
