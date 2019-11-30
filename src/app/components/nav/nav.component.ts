@@ -50,4 +50,16 @@ export class NavComponent implements OnInit {
         title: search.target.value
       }]);
   }
+
+  logout(){
+    let token = localStorage.getItem('token');
+
+    this.userService.logout(token).subscribe(
+      res => {
+        this.userService.setUser(undefined, null);
+        this.router.navigate(['']);
+      },
+      err => console.log(err)  // removeMe
+    )
+  }
 }

@@ -1,10 +1,42 @@
+<div class="main-wrap">
 
-<div class="wrap" (wheel)="wheelControl($event)" #eleWrap>
-  <div class="movies" #eleMovies>
-    <div class="movie" *ngFor="let movie of movies">
-       <!-- <h2>{{movie.title}}</h2>  -->
-        <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster">
-        <!-- <img src="https://image.tmdb.org/t/p/w200/{{movie.backdrop_path}}" alt="poster"> -->
+  <section class="detail-section" *ngIf="currentMov">
+    <div class="detail">
+      <div class="rent">
+        <span class="original"><strong>myNETFLIX</strong> ORIGINAL</span>
+        
+        <form (submit)="rentMovie(form)" #form="ngForm">
+          <input type="number" placeholder="days" min="1" max="3" ngModel #days="ngModel" name="days" required>
+          <span class="price">6$</span>
+          <button>Rent</button>
+        </form>
+
+      </div>
+      <span class="title">{{ currentMov.title | uppercase }}</span>
+      <div class="varios">
+        <span class="vote_average">{{ currentMov.vote_average }} Match</span>
+        <span class="release">{{ currentMov.release_date }}</span>
+        <span class="spec">4K ULTRA HD</span>
+        <span class="sound">5.1</span>
+      </div>
+      <p class="synopsis">{{ currentMov.overview }}</p>
+
     </div>
-  </div>
+    <img class="poster" [ngStyle]="{'background-image': currentPoster}" src="">
+  </section>
+
+  <section class="movies-section">
+    <div class="wrap" (wheel)="wheelControl($event)" #eleWrap1>
+      <div class="movies" #eleMovies1>
+        <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster" *ngFor="let movie of movies1"
+          (click)="setMovieDetail(movie)">
+      </div>
+    </div>
+    <div class="wrap" (wheel)="wheelControl($event)" #eleWrap2>
+      <div class="movies" #eleMovies2>
+        <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster" *ngFor="let movie of movies2"
+          (click)="setMovieDetail(movie)">
+      </div>
+    </div>
+  </section>
 </div>

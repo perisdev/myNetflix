@@ -4,6 +4,7 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
 
@@ -17,7 +18,8 @@ const routes: Routes = [
 
   //user
   { path: "signup", component: SignupComponent },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  { path: "profile", component: ProfileComponent }
 
   // {path: "", redirectTo: "discover", pathMatch:"full"},
   // {path:"discover", component:MovieListComponent},

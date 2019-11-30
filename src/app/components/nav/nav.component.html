@@ -37,9 +37,20 @@
     </a>
 
     <!-- search zone -->
-    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.getUser()" (keyup)="mySearch($event)">
+    <input type="text" placeholder="Search by title" class="search" *ngIf="userService.getUser()"
+      (keyup)="mySearch($event)">
 
     <!-- user zone -->
-    <img src="../../../assets/img/user.png" alt="user icon" class="user" *ngIf="userService.getUser()">
+    <div class="dropdown" *ngIf="userService.getUser()">
+      <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <img src="../../../assets/img/user.png" alt="user icon" class="user">
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" routerLink="/profile">Profile</a>
+        <p class="dropdown-item" (click)="logout()">Log out</p>
+      </div>
+    </div>
   </div>
 </nav>

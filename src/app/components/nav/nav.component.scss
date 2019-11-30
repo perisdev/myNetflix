@@ -17,7 +17,7 @@
   .bt-wrap {
     display: flex;
     align-items: flex-start;
-    margin-right: 50px;
+    margin-right: 10px;
     height: 82px;
 
     .bt,
@@ -53,7 +53,8 @@
       height: 35px;
       margin-left: 20px;
       padding: 12px 20px 12px 40px;
-      border: 1px solid $border-color;
+      // border: 1px solid $border-color;
+      border: 1px solid rgb(178, 174, 174, 0.5);
       outline: none;
       border-radius: 5px;
       background-color: transparent;
@@ -64,30 +65,46 @@
       font-size: 1.1em;
     }
 
-    .user {
-      margin-left: 20px;
-      height: 35px;
-    }
-
     // genre button
     #dropdownMenuButton {
       background: $netflix-color;
       border: none;
       border-radius: 3px;
       width: 90px;
-      height: 35px;      
+      height: 35px;
+
+      &:focus {
+        box-shadow: none; // remove border focus
+      }
     }
 
-    .dropdown-menu{
+    .dropdown-menu {
       background: transparent;
-      
+      min-width: auto;
+
       .dropdown-item {
         background: rgba(0, 0, 0, 0.9);
         color: $border-color;
+        cursor: pointer;
 
         &:hover {
           color: $netflix-color;
         }
+      }
+    }
+
+    .btn {
+      height: 35px;
+      width: 90px;
+      margin: 0;
+      padding: 0;
+
+      &:focus {
+        box-shadow: none; // remove border focus
+      }
+
+      .user {
+        height: 35px;
       }
     }
   }

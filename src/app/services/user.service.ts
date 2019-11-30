@@ -28,6 +28,16 @@ export class UserService {
       }
     })
   }
+
+  logout(token: string): Observable<object> {
+    return this.httpClient.get('http://localhost:3000/user/logout', {
+      headers: {
+        key: token
+      }
+    })
+  }
+
+
   // ...
 
   // getters & setters
@@ -36,8 +46,14 @@ export class UserService {
   }
   setUser(user: object, token: string): void {
     this.user = user;
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
+
+    if (user){
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    }
   }
   // ...
 }

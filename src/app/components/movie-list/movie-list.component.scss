@@ -1,17 +1,132 @@
-.wrap {
-  display: flex;
-  width: 99vw;
-  overflow: hidden;
+@import "../../../variables.scss";
 
-  .movies {
+.main-wrap {
+  height: calc(100vh - 150px);
+
+  .detail-section {
+    height: 60%;
+    padding-bottom: 1%;
+
     display: flex;
-    justify-content: flex-start;
-    width: auto;
 
-    img {
-      margin: 5px;
-      width: 200px;
-      height: 296px;
+    .detail {
+      display: flex;
+      flex-direction: column;
+      width: 55%;
+      padding-left: 50px;
+      color: #979393;
+
+      .rent {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+
+        .original {
+          color: $main-font-color;
+          font-size: 1.1em;
+        }
+
+        form {
+          display: flex;
+          text-align: center;
+
+          input,
+          .price {
+            width: 65px;
+            height: 25px;
+            background: #252525;
+            color: $main-font-color;
+            outline: none;
+            // border: 1px solid rgb(178, 174, 174, 0.5);
+            border: none;
+          }
+
+          input {
+            padding-left: 10px;
+            border-radius: 3px 0 0 3px;
+          }
+
+          .price {
+            color: $success-color;
+            border-left: 1px solid rgb(178, 174, 174, 0.5);
+          }
+
+          button {
+            width: 40px;
+            height: 25px;
+            border-radius: 0 3px 3px 0;
+            border: none;
+          }
+        }
+      }
+
+      .title {
+        color: $main-font-color;
+        font-size: 1.7em;
+        font-weight: 700;
+      }
+
+      .varios {
+        margin-top: 10px;
+        display: flex;
+        span {
+          margin-right: 15px;
+        }
+
+        .vote_average {
+          color: $success-color;
+        }
+
+        .spec,
+        .sound {
+          padding: 0 3px;
+          border: 1px solid rgb(178, 174, 174, 0.5);
+          border-radius: 3px;
+        }
+      }
+
+      .synopsis {
+        margin-top: 10px;
+        width: 80%;
+        overflow: hidden;
+      }
+    }
+
+    .poster {
+      width: 45%;
+      background-size: 100% 100%;
+      background-repeat: none;
+    }
+  }
+
+  .movies-section {
+    height: 35%;
+
+    .wrap {
+      display: flex;
+      width: 99vw;
+      height: 50%;
+      overflow: hidden;
+
+      .movies {
+        display: flex;
+        justify-content: flex-start;
+        width: auto;
+
+        img {
+          border: 2px solid transparent;
+          margin: 3px;
+          // width: 175/1.48px;
+          // height: 175px;
+          height: 98%;
+          width: calc($height / 1.48);
+          cursor: pointer;
+
+          &:hover {
+            border: 2px solid white;
+          }
+        }
+      }
     }
   }
 }
