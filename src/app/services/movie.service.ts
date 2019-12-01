@@ -16,7 +16,10 @@ export class MovieService {
 
     let tmpUrl: string;
 
-    if (params.params.listType !== 'title') {
+    if (params.params.listType === 'byId') {
+      // filter by id
+      tmpUrl = `${this.apiUrl}movies/?id=${params.params.id}`;
+    } else if (params.params.listType !== 'title') {
 
       // popular, premieres, latest
       if (this.noGenres.includes(params.params.listType))
@@ -29,7 +32,8 @@ export class MovieService {
     } else {
       // filter by title
       tmpUrl = `${this.apiUrl}movies/?title=${params.params.title}`;
-    }
+    
+    } 
 
     return this.httpClient.get(tmpUrl);
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,6 @@ import { UserService } from '../app/services/user.service';
 export class AppComponent {
   title = 'myNetflix';
 
-  constructor(private userService:UserService){}
+  constructor(private userService: UserService, private router: Router) { }
+
 }

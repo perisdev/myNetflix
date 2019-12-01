@@ -34,7 +34,7 @@ export class SignupComponent implements AfterViewInit {
         res => {
           this.msg = res;
           this.msgClass = 'msgOk';
-          setTimeout(() => this.autoLogin(form), 1000);
+          setTimeout(() => this.autoLogin(form), 500);
         },
         err => {
           this.msg = err.error;
@@ -56,11 +56,10 @@ export class SignupComponent implements AfterViewInit {
           username: form.value.username,
           email: form.value.email,
           level: 2,
-          // token: res['token']
         }
 
         this.userService.setUser(user, res['token']);
-        this.router.navigate(['/movies/premieres']);
+        setTimeout(() => this.router.navigate(['/movies/premieres']), 500);
       },
       err => this.msg = err.error
     );

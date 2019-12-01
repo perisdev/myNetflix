@@ -1,5 +1,5 @@
 <div class="main-wrap">
-  <div [ngClass]="{'back': true, 'back-dark': userService.getUser()}">
+  <div [ngClass]="{'back': true, 'back-dark': router.url.includes('movie')}">
     <app-nav></app-nav>
     <div class="router-wrap">
       <router-outlet></router-outlet>

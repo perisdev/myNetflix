@@ -20,12 +20,6 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
   { path: "profile", component: ProfileComponent }
-
-  // {path: "", redirectTo: "discover", pathMatch:"full"},
-  // {path:"discover", component:MovieListComponent},
-  // {path:"movies/:category",component:MovieCategoriesComponent},
-  // {path:"register",component:RegisterComponent},
-  // {path:"movie/:id", component:MovieDetailComponent}
 ];
 
 @NgModule({

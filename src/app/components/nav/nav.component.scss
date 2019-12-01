@@ -53,7 +53,7 @@
       height: 35px;
       margin-left: 20px;
       padding: 12px 20px 12px 40px;
-      // border: 1px solid $border-color;
+
       border: 1px solid rgb(178, 174, 174, 0.5);
       outline: none;
       border-radius: 5px;
@@ -61,7 +61,7 @@
       background-image: url("../../../assets/img/lens.png");
       background-size: 35px;
       background-repeat: no-repeat;
-      color: $border-color;
+      color: $menu-font-color;
       font-size: 1.1em;
     }
 
@@ -84,7 +84,7 @@
 
       .dropdown-item {
         background: rgba(0, 0, 0, 0.9);
-        color: $border-color;
+        color: $menu-font-color;
         cursor: pointer;
 
         &:hover {

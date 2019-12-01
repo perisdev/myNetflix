@@ -5,7 +5,7 @@
       <div class="rent">
         <span class="original"><strong>myNETFLIX</strong> ORIGINAL</span>
 
-        <div class="form" *ngIf="!userService.getUser()['order']['movieId']">
+        <div class="form" *ngIf="!userService.getUserLen()">
           <input type="number" placeholder="days" min="1" max="3" #days [value]="currentDays"
             (click)="getMoviePrice(days.value)">
           <span class="price">{{ currentPrice }}€</span>

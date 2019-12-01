@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -36,14 +35,13 @@ export class UserService {
       }
     })
   }
-
-
   // ...
 
   // getters & setters
   getUser(): object {
     return this.user;
   }
+
   setUser(user: object, token: string): void {
     this.user = user;
 
@@ -54,6 +52,12 @@ export class UserService {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
     }
+  }
+
+  getUserLen():boolean{
+    
+    let len = Object.keys(this.user).length;
+    return (len >= 6)? true:false;
   }
   // ...
 }

@@ -1,1 +1,32 @@
-<p>profile works!</p>
+<div class="wrap">
+
+  <section class="personal">
+    <div>
+      <h1>{{ userService.getUser()['username'] }}</h1>
+      <h2>Level: {{ userService.getUser()['level'] }} - (Reg)</h2>
+    </div>
+    <h2>{{ userService.getUser()['email'] }}</h2>
+  </section>
+
+  <section class="current" *ngIf="current">
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w200/{{ current['poster_path']}}" alt="">
+      <span>{{ userService.getUser()['order']['dateRent'] | date }}</span>
+      <span>{{ current['id'] }}</span>
+      <span>{{ current['title'] }}</span>
+      <span>{{ userService.getUser()['order']['daysRent'] }} (days)</span>
+      <span>{{ userService.getUser()['order']['price'] }}€</span>
+    </div>
+  </section>
+
+  <section class="historic" *ngIf="current">
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w200/{{ current['poster_path']}}" alt="">
+      <span>{{ userService.getUser()['order']['dateRent'] | date }}</span>
+      <span>{{ current['id'] }}</span>
+      <span>{{ current['title'] }}</span>
+      <span>{{ userService.getUser()['order']['daysRent'] }} (days)</span>
+      <span>{{ userService.getUser()['order']['price'] }}€</span>
+    </div>
+  </section>
+</div>

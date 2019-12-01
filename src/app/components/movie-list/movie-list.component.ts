@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@ang
 import { Movie } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/services/movie.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Genre } from 'src/app/models/genre.model';
 import { UserService } from 'src/app/services/user.service';
-import { format } from 'url';
 import { Form } from '@angular/forms';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -58,21 +56,16 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
 
-    // fill cities
-    this.orderService.getCities().subscribe(
-      res => this.cities = Object.values(res),
-      err => this.cities = [{ "name": "Valencia" }]
-    );
-    // ..
-
     // fill movies1, movies2
     if (this.userService.getUser()) {
+
       this.route.paramMap.subscribe(params => {
         this.movieService.getMovies(params).subscribe(
           res => {
             this.movies1 = Object.values(res);
             if (this.movies1.length > 0)
               this.setMovieDetail(this.movies1[0]);
+
             this.splitMovies();
           },
           err => this.movies1 = []
@@ -82,12 +75,19 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
       this.router.navigate(['']);
     }
     // ..
+
+
+    // fill cities
+    this.orderService.getCities().subscribe(
+      res => this.cities = Object.values(res),
+      err => this.cities = [{ "name": "Valencia" }]
+    );
+    // ..
   }
 
   setMovieDetail(movie: object): void {
     // movie
     this.currentMov = movie;
-    console.log(this.currentMov);
     this.currentPoster = "linear-gradient(to bottom, #000,  rgba(0,0,0,0), #000 99%), linear-gradient(to left, rgba(0,0,0,0) 97%, #000),"
     this.currentPoster = this.currentPoster.concat(`url('https://image.tmdb.org/t/p/w1280${this.currentMov["backdrop_path"]}')`);
 
@@ -100,7 +100,6 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   splitMovies(): void {
     if (this.movies1.length > 29) {
       let len = Math.round(this.movies1.length / 2);
-      console.log('len', len, this.movies1.length);
       this.movies2 = this.movies1.splice(len);
     } else {
       this.movies2 = [];
@@ -124,7 +123,6 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   }
 
   wheelControl(e: any): void {
-    // console.log((e.deltaY < 0) ? 'up' : 'down');  // removeMe
 
     this.moviesLen = this.movies1.length;
 
@@ -133,10 +131,6 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
     let movies2Width = this.eleMovies2.nativeElement.offsetWidth;
     let diffMoviesWrap = (moviesWidth - wrapWidth) * -1;
     let diffMovies2Wrap = (movies2Width - wrapWidth) * -1;
-
-    // console.log(e); // removeMe
-    // console.log(moviesWidth); // removeMe
-    // console.log(wrapWidth); // removeMe
 
     if (wrapWidth < moviesWidth) {
 
@@ -178,7 +172,6 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   // get price by movie type
   getMoviePrice(days: number) {
     this.currentDays = days;
-    console.log('days: ', this.currentDays);
 
     this.orderService.getPrices(this.currentMov['type']).subscribe(
       res => this.currentPrice = Object.values(res)[0].price * this.currentDays,
@@ -188,10 +181,6 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   rentMovie() {
 
-    console.log(this.userService.getUser()['order']['movieId']);
-
-    console.log('rent -> ', this.currentMov['title'], this.currentDays, this.currentPrice);
-    console.log(this.city.nativeElement.value);
     let token = localStorage.getItem('token');
 
     this.orderService.order({
@@ -201,14 +190,12 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
       "daysRent": this.currentDays,
       "price": this.currentPrice
     }, token).subscribe(
-      res => { 
-        console.log('res', res);
+      res => {
         this.userService.getProfile(token).subscribe(
           res => this.userService.setUser(res, token)
         );
       },
       err => console.log(err)
     )
-
   }
 }
