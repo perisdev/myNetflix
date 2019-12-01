@@ -37,4 +37,8 @@ export class MovieService {
   getGenres(): Observable<object> {
     return this.httpClient.get(this.apiUrl + "movies/genres");
   }
+
+  getPrices(movieType: Number): Observable<object> {
+    return this.httpClient.get(this.apiUrl + 'price/?type=' + movieType);
+  }
 }

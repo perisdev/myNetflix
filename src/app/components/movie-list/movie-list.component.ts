@@ -4,6 +4,8 @@ import { MovieService } from 'src/app/services/movie.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Genre } from 'src/app/models/genre.model';
 import { UserService } from 'src/app/services/user.service';
+import { format } from 'url';
+import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-list',
@@ -24,25 +26,32 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   //..
 
-  listType: String;
+  // attributes
+  listType: string;
+
   movies1: Array<Movie> = [];
   movies2: Array<Movie> = [];
+  moviesLen: number = 0;
+
   currentMov: object;
   currentPoster: string = '';
+  currentPrice: number = 0;
+  currentDays: number = null;
 
-  moviesLen: Number = 0;
-  genres: Array<Genre> = [];
+  marginMov1: number = 0;
+  marginMov2: number = 0;
+
+  myForm: Form;
+  //..
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private movieService: MovieService,
     private userService: UserService) { }
 
-  marginMov1: number = 0;
-  marginMov2: number = 0;
-
   ngOnInit() {
 
+    // fill movies1, movies2
     if (this.userService.getUser()) {
       this.route.paramMap.subscribe(params => {
         this.movieService.getMovies(params).subscribe(
@@ -58,14 +67,19 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
     } else {
       this.router.navigate(['']);
     }
-
+    // ..
   }
 
   setMovieDetail(movie: object): void {
+    // movie
     this.currentMov = movie;
     console.log(this.currentMov);
     this.currentPoster = "linear-gradient(to bottom, #000,  rgba(0,0,0,0), #000 99%), linear-gradient(to left, rgba(0,0,0,0) 97%, #000),"
     this.currentPoster = this.currentPoster.concat(`url('https://image.tmdb.org/t/p/w1280${this.currentMov["backdrop_path"]}')`);
+
+    // form
+    this.currentPrice = 0;
+    this.currentDays = null;
   }
 
   // if movies list is too long we divide it in two rows / arrays
@@ -84,9 +98,9 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
     // reset horizontal scroll initial position
     if (this.movies1.length !== this.moviesLen) {
       this.moviesLen = this.movies1.length;
-      this.marginMov1 = 0;
 
       setTimeout(() => {
+        this.marginMov1 = 0;
         this.marginMov2 = (this.eleMovies2.nativeElement.offsetWidth - this.eleWrap1.nativeElement.offsetWidth) * -1;
         this.eleMovies1.nativeElement.style = `margin-left: ${this.marginMov1}px`;
         this.eleMovies2.nativeElement.style = `margin-left: ${this.marginMov2}px`;
@@ -147,8 +161,20 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
     }, 0);
   }
 
-  rentMovie(form){
-    if (form.status === 'VALID')
-      console.log('rent -> ', this.currentMov['title'], form.value['days']);
+  // get price by movie type
+  getMoviePrice(days: number) {
+    this.currentDays = days;
+    console.log('days: ', this.currentDays);
+
+    this.movieService.getPrices(this.currentMov['type']).subscribe(
+      res => this.currentPrice = Object.values(res)[0].price * this.currentDays,
+      err => this.currentPrice = 1
+    );
+  }
+
+  rentMovie() {
+    console.log('rent -> ', this.currentMov['title'], this.currentDays, this.currentPrice);
+
+    
   }
 }
