@@ -32,13 +32,13 @@
   </section>
 
   <section class="movies-section">
-    <div class="wrap" (wheel)="wheelControl($event)" #eleWrap1>
+    <div [ngClass]="{ wrap: true }" (wheel)="wheelControl($event)" #eleWrap1>
       <div class="movies" #eleMovies1>
         <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster" *ngFor="let movie of movies1"
           (click)="setMovieDetail(movie)">
       </div>
     </div>
-    <div class="wrap" (wheel)="wheelControl($event)" #eleWrap2>
+    <div [ngClass]="{ wrap: true }" (wheel)="wheelControl($event)" #eleWrap2>
       <div class="movies" #eleMovies2>
         <img src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" alt="poster" *ngFor="let movie of movies2"
           (click)="setMovieDetail(movie)">

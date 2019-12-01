@@ -23,6 +23,9 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   @ViewChild('eleWrap1', { read: ElementRef, static: false })
   eleWrap1: any;
 
+  @ViewChild('eleWrap2', { read: ElementRef, static: false })
+  eleWrap2: any;
+
   @ViewChild('city', { read: ElementRef, static: false })
   city: any;
 
@@ -35,7 +38,7 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   movies1: Array<Movie> = [];
   movies2: Array<Movie> = [];
-  moviesLen: number = 0;
+  moviesLen1: number = 0;
 
   currentMov: object;
   currentPoster: string = '';
@@ -68,7 +71,10 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
             this.splitMovies();
           },
-          err => this.movies1 = []
+          err =>{
+            this.movies1 = [];
+            this.movies2 = [];
+          }
         );
       });
     } else {
@@ -98,7 +104,7 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   // if movies list is too long we divide it in two rows / arrays
   splitMovies(): void {
-    if (this.movies1.length > 29) {
+    if (this.movies1.length > 39) {
       let len = Math.round(this.movies1.length / 2);
       this.movies2 = this.movies1.splice(len);
     } else {
@@ -109,8 +115,8 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
 
     // reset horizontal scroll initial position
-    if (this.movies1.length !== this.moviesLen) {
-      this.moviesLen = this.movies1.length;
+    if (this.movies1.length !== this.moviesLen1) {
+      this.moviesLen1 = this.movies1.length;
 
       setTimeout(() => {
         this.marginMov1 = 0;
@@ -124,7 +130,7 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
 
   wheelControl(e: any): void {
 
-    this.moviesLen = this.movies1.length;
+    this.moviesLen1 = this.movies1.length;
 
     let wrapWidth = this.eleWrap1.nativeElement.offsetWidth;
     let moviesWidth = this.eleMovies1.nativeElement.offsetWidth;
