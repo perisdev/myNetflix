@@ -6,6 +6,7 @@ import { Genre } from 'src/app/models/genre.model';
 import { UserService } from 'src/app/services/user.service';
 import { format } from 'url';
 import { Form } from '@angular/forms';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -24,10 +25,15 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   @ViewChild('eleWrap1', { read: ElementRef, static: false })
   eleWrap1: any;
 
+  @ViewChild('city', { read: ElementRef, static: false })
+  city: any;
+
   //..
 
   // attributes
   listType: string;
+
+  cities: Array<object> = [];
 
   movies1: Array<Movie> = [];
   movies2: Array<Movie> = [];
@@ -47,9 +53,17 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private movieService: MovieService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private orderService: OrderService) { }
 
   ngOnInit() {
+
+    // fill cities
+    this.orderService.getCities().subscribe(
+      res => this.cities = Object.values(res),
+      err => this.cities = [{ "name": "Valencia" }]
+    );
+    // ..
 
     // fill movies1, movies2
     if (this.userService.getUser()) {
@@ -166,15 +180,35 @@ export class MovieListComponent implements OnInit, AfterViewChecked {
     this.currentDays = days;
     console.log('days: ', this.currentDays);
 
-    this.movieService.getPrices(this.currentMov['type']).subscribe(
+    this.orderService.getPrices(this.currentMov['type']).subscribe(
       res => this.currentPrice = Object.values(res)[0].price * this.currentDays,
       err => this.currentPrice = 1
     );
   }
 
   rentMovie() {
-    console.log('rent -> ', this.currentMov['title'], this.currentDays, this.currentPrice);
 
-    
+    console.log(this.userService.getUser()['order']['movieId']);
+
+    console.log('rent -> ', this.currentMov['title'], this.currentDays, this.currentPrice);
+    console.log(this.city.nativeElement.value);
+    let token = localStorage.getItem('token');
+
+    this.orderService.order({
+      "type": "rent",
+      "movieId": this.currentMov['id'],
+      "deliveryCity": this.city.nativeElement.value,
+      "daysRent": this.currentDays,
+      "price": this.currentPrice
+    }, token).subscribe(
+      res => { 
+        console.log('res', res);
+        this.userService.getProfile(token).subscribe(
+          res => this.userService.setUser(res, token)
+        );
+      },
+      err => console.log(err)
+    )
+
   }
 }

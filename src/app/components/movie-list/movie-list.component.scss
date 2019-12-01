@@ -31,24 +31,37 @@
           text-align: center;
 
           input,
-          .price {
-            width: 65px;
+          .price,
+          select {
             height: 25px;
             background: #252525;
             color: $main-font-color;
             outline: none;
-            // border: 1px solid rgb(178, 174, 174, 0.5);
             border: none;
           }
 
           input {
+            width: 58px;
             padding-left: 10px;
             border-radius: 3px 0 0 3px;
           }
 
           .price {
+            width: 40px;
             color: $success-color;
             border-left: 1px solid rgb(178, 174, 174, 0.5);
+          }
+
+          select {
+            width: 100px;
+            padding-left: 10px;
+            box-shadow: none;
+            color: #979393;
+            border-left: 1px solid rgb(178, 174, 174, 0.5);
+
+            option {
+              color: #979393;
+            }
           }
 
           button {

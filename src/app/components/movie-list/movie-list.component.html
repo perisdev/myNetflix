@@ -5,9 +5,15 @@
       <div class="rent">
         <span class="original"><strong>myNETFLIX</strong> ORIGINAL</span>
 
-        <div class="form">
-          <input type="number" placeholder="days" min="1" max="3" #days [value]="currentDays" (click)="getMoviePrice(days.value)">
+        <div class="form" *ngIf="!userService.getUser()['order']['movieId']">
+          <input type="number" placeholder="days" min="1" max="3" #days [value]="currentDays"
+            (click)="getMoviePrice(days.value)">
           <span class="price">{{ currentPrice }}€</span>
+
+          <select name="city" #city>
+            <option [value]="city.name" *ngFor="let city of cities">{{ city.name }}</option>
+          </select>
+
           <button [disabled]="currentPrice === 0 || currentDays === 0" (click)="rentMovie()">Rent</button>
         </div>
 
