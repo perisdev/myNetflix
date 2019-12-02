@@ -12,6 +12,7 @@
     <div class="movie">
       <img src="https://image.tmdb.org/t/p/w200/{{ current['poster_path']}}" alt="">
       <span>{{ userService.getUser()['order']['dateRent'] | date }}</span>
+      <span>{{ userService.getUser()['order']['dateArrival'] | date }}</span>
       <span>{{ current['id'] }}</span>
       <span>{{ current['title'] }}</span>
       <span>{{ userService.getUser()['order']['daysRent'] }} (days)</span>
@@ -23,6 +24,7 @@
     <div class="movie">
       <img src="https://image.tmdb.org/t/p/w200/{{ current['poster_path']}}" alt="">
       <span>{{ userService.getUser()['order']['dateRent'] | date }}</span>
+      <span>{{ userService.getUser()['order']['dateArrival'] | date }}</span>
       <span>{{ current['id'] }}</span>
       <span>{{ current['title'] }}</span>
       <span>{{ userService.getUser()['order']['daysRent'] }} (days)</span>
